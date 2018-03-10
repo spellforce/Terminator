@@ -1,11 +1,12 @@
-import * as reducers from "./reducers";
+import * as reducers from "./reducers/index";
 // src/containers/Hello.tsx
 
 import Hello from './components/Hello';
-import * as actions from './actions/';
+import * as actions from './actions/index';
 import { StoreState } from './types/index';
 import { connect, Dispatch } from 'react-redux';
 import {TPosition} from "../../interfaces/define";
+import DragMenuButton from "./components/Icon";
 
 export function mapStateToProps(state) :any{
     console.log(state);
@@ -22,8 +23,9 @@ export function mapDispatchToProps(dispatch: Dispatch<any>) {
     };
 }
 
-export default {'Hello':{
+export default {
     class: connect(mapStateToProps)(Hello),
-    position: TPosition.TOP,
+    icon: DragMenuButton,
+    position: TPosition.LEFT,
     reducers
-}}
+}

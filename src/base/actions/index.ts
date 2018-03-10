@@ -1,3 +1,1 @@
-export function test(){
-    return {type:'x'}
-}
+import {createElement} from 'react'

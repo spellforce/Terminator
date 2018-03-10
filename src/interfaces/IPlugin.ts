@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 declare interface IPlugin {
     /**
      * Position insert to editor

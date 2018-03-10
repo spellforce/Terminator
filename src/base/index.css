@@ -1,0 +1,75 @@
+.terminator{
+    display: flex;
+    flex-direction:column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.terminator > .top{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+.terminator > .bottom{
+    display: flex;
+    align-items:flex-end;
+    border-top: 1px solid #ddd;
+}
+.terminator > .content{
+    display: flex;
+    flex-grow: 1;
+    background: whitesmoke;
+}
+.terminator > .content > .left{
+    display: flex;
+    border-right: 1px solid #ddd;
+}
+.terminator > .content > .viewport{
+    display: flex;
+    flex-grow: 1;
+    margin: 4px;
+    background: #fff;
+}
+.terminator  > .content > .right{
+    display: flex;
+    border-left: 1px solid #ddd;
+}
+
+.terminator > .top > .icons,.terminator > .bottom > .icons{
+    display: flex;
+    justify-content: space-between;
+    background: whitesmoke;
+}
+.terminator > .content > .left > .icons,.terminator  > .content > .right > .icons{
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+}
+
+.terminator > .top > .plugins{
+    border-top: 1px solid #ddd;
+}
+.terminator > .bottom > .plugins{
+    border-bottom: 1px solid #ddd;
+}
+.terminator > .content > .left > .plugins{
+    border-left: 1px solid #ddd;
+}
+.terminator > .content > .right > .plugins{
+    border-right: 1px solid #ddd;
+}
+
+.terminator .terminator-icons{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    min-height: 40px;
+    min-width: 40px;
+}
+.terminator .left .terminator-icons,.terminator .right .terminator-icons{
+    border-bottom: 1px solid #ddd;
+}
+.terminator .top .terminator-icons,.terminator .bottom .terminator-icons{
+    border-right: 1px solid #ddd;
+}

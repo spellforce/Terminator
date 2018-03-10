@@ -1,22 +1,29 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import { enthusiasm } from './reducers/index';
-import { StoreState } from './types/index';
 import registerServiceWorker from './registerServiceWorker';
-import Hello from './containers/Hello';
+// import DragMenuButton from './containers/drag-menu-button';
 import { Provider } from 'react-redux';
 import './index.css';
+import "antd/dist/antd.css"
+import Terminator from "./Terminator";
+import TerminatorMain from "./base/index";
 
-const store = createStore<StoreState>(enthusiasm, {
-    enthusiasmLevel: 1,
-    languageName: 'TypeScript',
-});
-
+export default class TerminatorEditor extends React.Component{
+    public terminator = new Terminator();
+    componentWillMount() {
+        this.terminator.init();
+    }
+    render(){
+        return (
+            <Provider {...this.terminator.getStore()}>
+                <TerminatorMain />
+            </Provider>
+        )
+    }
+}
 ReactDOM.render(
-    <Provider store={store}>
-        <Hello />
-    </Provider>,
-    document.getElementById('root') as HTMLElement
+    <TerminatorEditor />,
+    document.getElementById('terminator-root') as HTMLElement
 );
 registerServiceWorker();
