@@ -4,6 +4,8 @@ import * as React from 'react';
 import {Props} from "./interfaces/PS";
 import * as fs from 'fs';
 import {StoreState} from "./base/types";
+import Actions from "./base/actions";
+import {Constants} from "./define";
 declare const require: any;
 interface IPlugin{
     icon: any
@@ -12,7 +14,15 @@ interface IPlugin{
     reducers?: any
 }
 export default class Terminator{
-    private stores = [];
+    static get stores(): any {
+        return this._stores;
+    }
+
+    static set stores(value: any) {
+        this._stores = value;
+    }
+
+    private static _stores = null;
     private rootReducer = null;
     private reducers:any = {};
     private constatants = [];
@@ -32,11 +42,14 @@ export default class Terminator{
             // this.plugins[i] = context(key).default[i];
             this.plugins.push(context(key).default)
         });
-        Terminator.log(this.plugins);
+        // Terminator.log(this.plugins);
         // this.addRenders();
         this.rootReducer = combineReducers(
             {...reducers}
         );
+        Terminator.stores = createStore<StoreState>(this.rootReducer,{plugins:this.plugins});
+        Actions.instance = Terminator.stores;
+        Terminator.stores.dispatch({type:Constants.SET_ACTION,value:Actions.instance.export()});
         Terminator.log("Terminator init end");
 
     }
@@ -64,7 +77,7 @@ export default class Terminator{
     // }
 
 
-    public getStore(){
-        return {store:createStore<StoreState>(this.rootReducer,{plugins:this.plugins})};
-    }
+    // public getStore(){
+    //     return {store:createStore<StoreState>(this.rootReducer,{plugins:this.plugins})};
+    // }
 }

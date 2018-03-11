@@ -1,8 +1,10 @@
 export interface StoreState {
+    actions?:any,
     plugins?:any,
     tools?:[number,number,number,number],
     viewport?:any,
-    app?:any
+    app?:any,
+    dispatch?:any,
 }
 
 export class ViewportStore {

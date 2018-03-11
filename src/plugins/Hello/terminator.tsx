@@ -5,12 +5,12 @@ import Hello from './components/Hello';
 import * as actions from './actions/index';
 import { StoreState } from './types/index';
 import { connect, Dispatch } from 'react-redux';
-import {TPosition} from "../../interfaces/define";
+import {TPosition} from "../../define/index";
 import DragMenuButton from "./components/Icon";
 
 export function mapStateToProps(state) :any{
-    console.log(state);
     return {
+        ...state,
         enthusiasmLevel:1,
         name: "张鑫",
     };

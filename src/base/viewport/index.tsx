@@ -2,6 +2,7 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 import {StoreState, ViewportStore} from "../types";
 import Helper from "./Helper";
+import {Button} from 'antd'
 
 export default class Viewport extends React.Component<StoreState,ViewportStore> {
     helper = null;
@@ -21,7 +22,7 @@ export default class Viewport extends React.Component<StoreState,ViewportStore> 
 
     }
     public componentDidMount() {
-        this.domInstance = document.getElementById("items") as HTMLElement
+        this.domInstance = document.getElementById("items") as HTMLElement;
 
         // 绑定监听
         // this.domInstance.addEventListener("mouseover", this.handleMouseOver)
@@ -33,7 +34,13 @@ export default class Viewport extends React.Component<StoreState,ViewportStore> 
 
         // 如果自己是布局元素, 给子元素绑定 sortable
         // if (this.setting.isContainer) {
-            // 添加可排序拖拽
+        // 添加可排序拖拽
+        this.helper.registerInnerDrag(null,  document.getElementById("item2"), {
+            draggable: ".gaea-draggable"
+        });
+        this.helper.registerInnerDrag(null,  document.getElementById("item3"), {
+            draggable: ".gaea-draggable"
+        });
             this.helper.registerInnerDrag(null, this.domInstance, {
                 draggable: ".gaea-draggable"
             })
@@ -43,11 +50,17 @@ export default class Viewport extends React.Component<StoreState,ViewportStore> 
     render(){
         return (
             <div className="viewport">
-                <ul id="items">
-                    <li>item 1</li>
-                    <li>item 2</li>
-                    <li>item 3</li>
-                </ul>
+                <div id="items">
+                    <div>item 1</div>
+                    <div id="item3">item 2 <Button>111</Button> <Button>111</Button></div>
+                    <div>item 3</div>
+                    <Button>111</Button>
+                </div>
+                <div id="item2">
+                    <div>item 4</div>
+                    <div>item 5</div>
+                    <div>item 6</div>
+                </div>
             </div>
         )
     }

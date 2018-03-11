@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
 // import DragMenuButton from './containers/drag-menu-button';
 import { Provider } from 'react-redux';
@@ -16,7 +15,7 @@ export default class TerminatorEditor extends React.Component{
     }
     render(){
         return (
-            <Provider {...this.terminator.getStore()}>
+            <Provider store={Terminator.stores}>
                 <TerminatorMain />
             </Provider>
         )
