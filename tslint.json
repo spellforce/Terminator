@@ -21,6 +21,7 @@
         "interface-name": [true, "never-prefix"],
         "jsdoc-format": true,
         "jsx-no-lambda": false,
+        "eslint-disable-next-line":false,
         "jsx-no-multiline-js": false,
         "label-position": true,
         "max-line-length": [ true, 150 ],
