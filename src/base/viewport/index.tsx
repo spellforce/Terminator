@@ -1,67 +1,57 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import {StoreState, ViewportStore} from "../types";
+import {StoreState} from "../types";
 import Helper from "./Helper";
 import {Button} from 'antd'
+import {connect} from "react-redux";
+import {Constants} from "../../define";
+import './index.css';
 
-export default class Viewport extends React.Component<StoreState,ViewportStore> {
+class Viewport extends React.Component<StoreState> {
     helper = null;
-    /**
-     * 当前组件 dom 对象
-     */
-    private domInstance: HTMLElement
-
     constructor(props){
         super(props);
         this.helper = new Helper({...this.props,...this.state});
     }
-    handleMouseOver(){
 
-    }
-    handleClick(){
+    /**
+     * 获取自己的实例
+     */
+    public getRef = (ref: React.ReactInstance) => {
+        this.props.dispatch({type:Constants.SET_VIEWPORT_DOM,value:ReactDOM.findDOMNode(ref) as HTMLElement});
+        // console.info('ref',ref);
+        this.props.actions.registerInnerDrag(ref)
+    };
+    /**
+     * 鼠标移开视图区域
+     */
+    public handleMouseLeave = (event) => {
+        event.stopPropagation();
+        // console.log('handleMouseLeave')
+        // 触发事件
+        // this.props.actions.EventAction.emit(this.props.stores.EventStore.mouseLeaveViewport)
 
-    }
+        // 设置当前 hover 的元素为 null
+        this.props.actions.setCurrentHoverInstanceKey(null);
+    };
+
     public componentDidMount() {
-        this.domInstance = document.getElementById("items") as HTMLElement;
-
-        // 绑定监听
-        // this.domInstance.addEventListener("mouseover", this.handleMouseOver)
-        // this.domInstance.addEventListener("click", this.handleClick)
-
-
-        // 设置此实例的 dom 节点
-        // this.props.actions.ViewportAction.setDomInstance(this.props.instanceKey, this.domInstance)
-
-        // 如果自己是布局元素, 给子元素绑定 sortable
-        // if (this.setting.isContainer) {
-        // 添加可排序拖拽
-        this.helper.registerInnerDrag(null,  document.getElementById("item2"), {
-            draggable: ".gaea-draggable"
-        });
-        this.helper.registerInnerDrag(null,  document.getElementById("item3"), {
-            draggable: ".gaea-draggable"
-        });
-            this.helper.registerInnerDrag(null, this.domInstance, {
-                draggable: ".gaea-draggable"
-            })
-        // }
+        console.log('Viewport componentDidMount');
+        console.log(new Button({type:'danger'}))
+        console.log((
+            <Button />
+        ))
     }
 
     render(){
         return (
-            <div className="viewport">
-                <div id="items">
-                    <div>item 1</div>
-                    <div id="item3">item 2 <Button>111</Button> <Button>111</Button></div>
-                    <div>item 3</div>
-                    <Button>111</Button>
+            <div className="viewport" onMouseLeave={this.handleMouseLeave}>
+                <div className="viewport_root" ref={this.getRef} id="zx_root">
+
                 </div>
-                <div id="item2">
-                    <div>item 4</div>
-                    <div>item 5</div>
-                    <div>item 6</div>
-                </div>
+                {this.props.actions.loadNoPositionPlugins()}
             </div>
         )
     }
 }
+export default connect((state)=>{return state})(Viewport);

@@ -49,6 +49,9 @@ export default class Terminator{
         );
         Terminator.stores = createStore<StoreState>(this.rootReducer,{plugins:this.plugins});
         Actions.instance = Terminator.stores;
+        /**
+         * 将action注入props方便插件调用
+         * */
         Terminator.stores.dispatch({type:Constants.SET_ACTION,value:Actions.instance.export()});
         Terminator.log("Terminator init end");
 
@@ -59,15 +62,15 @@ export default class Terminator{
             console.log(message,...optionalParams);
         }
     }
-    addRenders(){
-        for(let i in this.plugins){
-            for(let j in this.plugins[i].reducers){
-                this.reducers[j] = this.plugins[i].reducers[j];
-                // this.reducers
-            }
-        }
-        console.log(this.reducers)
-    }
+    // addRenders(){
+    //     for(let i in this.plugins){
+    //         for(let j in this.plugins[i].reducers){
+    //             this.reducers[j] = this.plugins[i].reducers[j];
+    //             // this.reducers
+    //         }
+    //     }
+    //     console.log(this.reducers)
+    // }
 
     // public getProps():Props{
     //     return {

@@ -1,5 +1,6 @@
 import {Map,List} from 'immutable';
 import {Constants} from "../../define";
+import {InstanceStore, ViewportStore} from "../types";
 // import Actions from "../actions";
 const initialState = [];
 export function actions(state = null,action){
@@ -34,3 +35,48 @@ export function tools(state = List([-1,-1,-1,-1]) as any, action:any) {
     }
     return state;
 }
+
+export function viewport(state:ViewportStore = new ViewportStore(), action:any) {
+    switch (action.type) {
+        case Constants.SET_VIEWPORT_DOM:
+            state.viewportDOM = action.value;
+            let Instance = new InstanceStore();
+            Instance.dom = action.value;
+            Instance.id = action.value.id;
+            // Instance.dom.instanceKey = Instance.key;
+            state.instances.set(Instance.id,Instance);
+            return state;
+        case Constants.SET_NEW_INSTANCE:
+            state.instances.set(action.value.id,action.value);
+            return state;
+        case Constants.SET_HOVER_INSTANCE:
+            state.currentHoverId = action.value;
+            return Object.assign({}, state);
+        default:break;
+    }
+    return state;
+}
+
+// export class TerminatorStore{
+//     private _store;
+//
+//     get store() {
+//         return this._store;
+//     }
+//
+//     set store(value) {
+//         this._store = value;
+//     }
+//
+//     viewport(state:ViewportStore = new ViewportStore(), action:any) {
+//         switch (action.type) {
+//             case Constants.SET_VIEWPORT_DOM:
+//                 state.viewportDOM = action.value;
+//                 return state;
+//             default:break;
+//         }
+//         return state;
+//     }
+//
+//
+// }

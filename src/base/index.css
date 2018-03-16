@@ -23,12 +23,6 @@
     display: flex;
     border-right: 1px solid #ddd;
 }
-.terminator > .content > .viewport{
-    display: flex;
-    flex-grow: 1;
-    margin: 4px;
-    background: #fff;
-}
 .terminator  > .content > .right{
     display: flex;
     border-left: 1px solid #ddd;

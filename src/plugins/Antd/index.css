@@ -1,0 +1,19 @@
+#antds{
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+.t-component{
+    width: 50px;
+}
+.t-drag-display{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.t-component-name{
+    text-align: center;
+}
